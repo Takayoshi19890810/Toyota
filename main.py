@@ -164,11 +164,12 @@ def get_msn_news_with_selenium(keyword: str):
             if pub_date == "取得不可" and url:
                 pub_date = get_last_modified_datetime(url)
 
-            if title and url:
+            # ✅ 日本語チェックを追加（ひらがな・カタカナ・漢字）
+            if title and re.search(r'[\u3040-\u30FF\u4E00-\u9FFF]', title):
                 data.append({"タイトル": title, "URL": url, "投稿日": pub_date, "引用元": source or "MSN"})
         except:
             continue
-    print(f"✅ MSNニュース件数: {len(data)} 件（{keyword}）")
+    print(f"✅ MSN日本語ニュース件数: {len(data)} 件（{keyword}）")
     return data
 
 def write_to_spreadsheet(articles, spreadsheet_id, worksheet_name):
