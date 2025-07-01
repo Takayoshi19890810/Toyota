@@ -1,0 +1,2 @@
+# news-scraper-toyota
+トヨタのニュースチェック
