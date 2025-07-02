@@ -14,8 +14,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 import gspread
 
-KEYWORDS = ["トヨタ", "Toyota", "toyota"]
-SPREADSHEET_ID = "1RglATeTbLU1SqlfXnNToJqhXLdNoHCdePldioKDQgU8"
+KEYWORD = "トヨタ"
+SPREADSHEET_ID = "1N7sZGtFnvICo6yBkw0WHtuYG3-lKYO0_p4-IGOcPjOo"
 
 def format_datetime(dt_obj):
     return dt_obj.strftime("%Y/%m/%d %H:%M")
@@ -183,14 +183,12 @@ def get_msn_news_with_selenium(keyword: str) -> list[dict]:
             url = card.get("data-url", "").strip()
             source = card.get("data-author", "").strip()
             pub_label = ""
-            pub_date = ""
 
             pub_tag = card.find("span", attrs={"aria-label": True})
             if pub_tag and pub_tag.has_attr("aria-label"):
                 pub_label = pub_tag["aria-label"].strip().lower()
 
             pub_date = parse_relative_time(pub_label, now)
-
             if pub_date == "取得不可" and url:
                 pub_date = get_last_modified_datetime(url)
 
