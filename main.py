@@ -381,7 +381,7 @@ def classify_rows_with_gemini(worksheet: gspread.Worksheet, row_indices: list[in
         prompt = GEMINI_PROMPT + "\n\n" + json.dumps(batch, ensure_ascii=False, indent=2)
 
         try:
-            model = genai.GenerativeModel("gemini-1.5-flash-latest")
+            model = genai.GenerativeModel("gemini-pro")
             resp = model.generate_content(prompt)
             text = (resp.text or "").strip()
 
