@@ -23,4 +23,5 @@ jobs:
       - name: Run News Script
         env:
           GCP_SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}   # ✅ ←これを追加！
         run: python main.py
